@@ -1,0 +1,8 @@
+node_modules/
+screenshots/
+discovery/
+.env
+auth.json
+*.js
+.DS_Store
+.claude/settings.local.json

@@ -1,0 +1,21 @@
+{
+  "name": "quickclick-order",
+  "version": "1.0.0",
+  "description": "Playwright automation for quickclick.cc (LINE LIFF ordering)",
+  "type": "module",
+  "scripts": {
+    "pw": "tsx playwright-order.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "playwright": "^1.58.2",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  }
+}

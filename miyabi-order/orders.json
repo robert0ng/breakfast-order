@@ -1,0 +1,42 @@
+{
+  "store": {
+    "url": "https://morning-web.cinpos.com/store/72a8ab38334095e37ff99f168a0484fb?orderType=TO_GO",
+    "name": "蘆洲碳烤三明治"
+  },
+  "customer": {
+    "name": "王",
+    "phone": "0913936203"
+  },
+  "pickupTime": "07:00:00",
+  "orders": [
+    {
+      "name": "Daily (火腿蛋吐司 x4)",
+      "items": [
+        { "item": "招牌火腿蛋吐司", "qty": 3 },
+        { "item": "招牌火腿蛋吐司", "qty": 1, "adjustments": ["不加生菜"] }
+      ]
+    },
+    {
+      "name": "Light (火腿蛋吐司 x2)",
+      "items": [
+        { "item": "招牌火腿蛋吐司", "qty": 1 },
+        { "item": "招牌火腿蛋吐司", "qty": 1, "adjustments": ["不加生菜"] }
+      ]
+    },
+    {
+      "name": "French Toast Mix (法國吐司 x4)",
+      "items": [
+        { "item": "楓糖法國吐司", "qty": 2 },
+        { "item": "草莓法國吐司", "qty": 2 }
+      ]
+    },
+    {
+      "name": "Choco Mix (法國+火腿 x4)",
+      "items": [
+        { "item": "巧克力法國吐司", "qty": 1 },
+        { "item": "招牌火腿蛋吐司", "qty": 2 },
+        { "item": "招牌火腿蛋吐司", "qty": 1, "adjustments": ["不加生菜"] }
+      ]
+    }
+  ]
+}

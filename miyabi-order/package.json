@@ -1,0 +1,26 @@
+{
+  "name": "miyabi-order",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npx playwright install chromium",
+    "discover": "tsx discover.ts",
+    "order": "tsx order.ts",
+    "auto": "tsx auto-order.ts",
+    "real": "tsx real-order.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@inquirer/prompts": "^8.3.2",
+    "playwright": "^1.58.2",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^5.9.3"
+  }
+}

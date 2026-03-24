@@ -1,0 +1,17 @@
+{
+  "name": "breakfast-order",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "menu": "tsx menu.ts"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.3.2",
+    "playwright": "^1.58.2",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^5.9.3"
+  }
+}
