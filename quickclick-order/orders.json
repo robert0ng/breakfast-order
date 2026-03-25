@@ -3,31 +3,79 @@
     "addabaobao": "添飽寶",
     "moring-food-lunch-flavor": "晨食午味"
   },
-  "customer": { "name": "測試", "phone": "0900000000" },
+  "customer": {
+    "name": "王",
+    "phone": "0913936203"
+  },
   "pickupTime": "07:00:00",
   "orders": [
     {
       "name": "eggroll",
       "store": "addabaobao",
       "items": [
-        { "item": "玉米", "qty": 2, "adjustments": { "category": "蛋餅/脆餅", "餅點選擇": "脆餅", "餐點需求": "加雙蛋" } },
-        { "item": "里肌排", "qty": 2, "adjustments": { "category": "蛋餅/脆餅", "餅點選擇": "蛋餅", "餐點需求": "加雙蛋" } }
+        {
+          "item": "玉米",
+          "qty": 2,
+          "adjustments": {
+            "category": "蛋餅/脆餅",
+            "餅點選擇": "脆餅",
+            "餐點需求": "加雙蛋"
+          }
+        },
+        {
+          "item": "里肌排",
+          "qty": 2,
+          "adjustments": {
+            "category": "蛋餅/脆餅",
+            "餅點選擇": "蛋餅",
+            "餐點需求": "加雙蛋"
+          }
+        }
       ]
     },
     {
       "name": "morning",
       "store": "moring-food-lunch-flavor",
       "items": [
-        { "item": "牛肉培根起司", "qty": 4, "adjustments": { "category": "三明治&漢堡", "麵包選擇": "吐司", "加料": "加蛋" } }
+        {
+          "item": "牛肉培根起司",
+          "qty": 4,
+          "adjustments": {
+            "category": "三明治&漢堡",
+            "麵包選擇": "吐司",
+            "加料": "加蛋"
+          }
+        }
       ]
     },
     {
       "name": "random",
       "store": "moring-food-lunch-flavor",
       "items": [
-        { "item": "菲力雞排茄汁燉飯", "qty": 1, "adjustments": { "category": "飯類" } },
-        { "item": "玉米", "qty": 2, "adjustments": { "category": "酥皮蛋餅/抓餅蛋", "餅皮選擇": "蛋餅" } },
-        { "item": "紅茶", "qty": 2, "adjustments": { "category": "喝的", "飲品尺寸": "中杯", "飲品溫度": "冰" } }
+        {
+          "item": "菲力雞排茄汁燉飯",
+          "qty": 1,
+          "adjustments": {
+            "category": "飯類"
+          }
+        },
+        {
+          "item": "玉米",
+          "qty": 2,
+          "adjustments": {
+            "category": "酥皮蛋餅/抓餅蛋",
+            "餅皮選擇": "蛋餅"
+          }
+        },
+        {
+          "item": "紅茶",
+          "qty": 2,
+          "adjustments": {
+            "category": "喝的",
+            "飲品尺寸": "中杯",
+            "飲品溫度": "冰"
+          }
+        }
       ]
     }
   ]

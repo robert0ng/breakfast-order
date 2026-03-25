@@ -292,6 +292,18 @@ async function main() {
     await page.goto(TARGET_URL, { waitUntil: "networkidle" });
     await shot(page, "01-menu");
 
+    // 1b. Dismiss announcement modal (公告) if present
+    const blocker = page.locator(".jquery-modal.blocker.current");
+    if (await blocker.isVisible({ timeout: 3000 }).catch(() => false)) {
+      console.log("  Dismissing 公告 modal...");
+      await page.evaluate(() => {
+        document.querySelectorAll(".jquery-modal.blocker, .jquery-modal.current").forEach((el) => {
+          (el as HTMLElement).style.display = "none";
+        });
+      });
+      await page.waitForTimeout(400);
+    }
+
     // 2. Clear existing cart
     console.log("[2] Clearing cart...");
     await clearCart(page);
@@ -318,16 +330,18 @@ async function main() {
     await page.waitForTimeout(1500);
     await shot(page, "03-step1");
 
-    // 4b. If "Other 其它需求" step appears, click 下一步 to advance
-    const clicked4b = await page.evaluate(() => {
-      const links = Array.from(document.querySelectorAll("a"));
-      const btn = links.find(el => el.textContent?.trim() === "下一步");
-      if (btn) { btn.click(); return true; }
-      return false;
-    });
-    if (clicked4b) {
-      console.log("[4b] Advancing past 其它需求 step...");
-      await page.waitForTimeout(1000);
+    // 4b. Advance through any intermediate 下一步 steps until 自取 (get_way) is visible
+    for (let step = 0; step < 5; step++) {
+      const getWayVisible = await page.locator("ul.get_way").isVisible({ timeout: 800 }).catch(() => false);
+      if (getWayVisible) break;
+      const clicked = await page.evaluate(() => {
+        const btn = Array.from(document.querySelectorAll("a")).find(el => el.textContent?.trim() === "下一步");
+        if (btn) { (btn as HTMLElement).click(); return true; }
+        return false;
+      });
+      if (!clicked) break;
+      console.log(`[4b] Advancing past intermediate step ${step + 1}...`);
+      await page.waitForTimeout(1200);
     }
 
     // 5. Select 自取
@@ -390,16 +404,37 @@ async function main() {
       return;
     }
 
-    // 9. Submit
+    // 9. Submit — open payment modal
     console.log("[9] Submitting order...");
     await page.click('a[href="#finish"]');
     await page.waitForSelector("#finish", { state: "visible" });
-    await shot(page, "06-confirm-modal");
+    await page.waitForTimeout(800);
+    await shot(page, "06-payment-modal");
 
-    // Confirm in the finish modal
-    await page.locator("#finish a.next").click();
+    // Click 現場付款 (cash on pickup) — the only payment option
+    console.log("  Selecting 現場付款...");
+    const cashBtn = page.locator("#finish").getByText("現場付款", { exact: false });
+    await cashBtn.waitFor({ state: "visible", timeout: 5000 });
+    await cashBtn.click();
     await page.waitForTimeout(2000);
-    await shot(page, "07-done");
+    await shot(page, "07-after-payment");
+
+    // After payment selection, a final "您即將送出訂單" confirmation dialog — click 確定
+    console.log("  Waiting for final 確定 confirmation...");
+    await page.waitForTimeout(500);
+    await shot(page, "07b-final-confirm");
+    const clicked = await page.evaluate(() => {
+      const els = Array.from(document.querySelectorAll("button, a"));
+      const btn = els.find(
+        (el) => el.textContent?.trim() === "確定" && (el as HTMLElement).offsetParent !== null
+      );
+      if (btn) { (btn as HTMLElement).click(); return true; }
+      return false;
+    });
+    if (!clicked) throw new Error("Could not find visible 確定 button");
+    console.log("  ✓ Confirmed!");
+    await page.waitForTimeout(2000);
+    await shot(page, "08-done");
 
     console.log("\n✅ Order submitted!");
     console.log(`Screenshots: ${SCREENSHOTS_DIR}`);
