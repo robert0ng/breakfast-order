@@ -232,12 +232,18 @@ async function submitOrder(page: Page) {
       await altSubmit.click();
       console.log("  Clicked 送出訂單!");
     } else {
-      console.error("  ERROR: Could not find submit button!");
-      await page.screenshot({
-        path: path.join(SCREENSHOTS_DIR, "auto-no-submit-btn.png"),
-        fullPage: true,
-      });
-      return false;
+      const nextBtn = page.locator('button:has-text("下一步")');
+      if (await nextBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
+        await nextBtn.click();
+        console.log("  Clicked 下一步!");
+      } else {
+        console.error("  ERROR: Could not find submit button!");
+        await page.screenshot({
+          path: path.join(SCREENSHOTS_DIR, "auto-no-submit-btn.png"),
+          fullPage: true,
+        });
+        return false;
+      }
     }
   }
 
